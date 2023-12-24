@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/message_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="550dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,12 +20,14 @@
         android:layout_marginTop="600dp"
         >
         <EditText
+            android:id="@+id/text_message_sent"
             android:layout_marginStart="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
              />
         <Button
+            android:id="@+id/send_button"
             android:layout_width="84dp"
             android:layout_height="48dp"
             android:text="Send"

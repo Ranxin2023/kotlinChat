@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SocketDemo</string>
+    <string name="default_date">Jun. 10th </string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.socketdemo
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
@@ -17,49 +18,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
-
-class SocketClient(private val host: String) {
-    private lateinit var mSocket: Socket
-
-    init {
-        try {
-            mSocket = IO.socket(host)
-        } catch (e: URISyntaxException) {
-            e.printStackTrace()
-        }
-    }
-
-    fun start() {
-        CoroutineScope(Dispatchers.IO).launch {
-            connectSocket()
-            setupListeners()
-        }
-    }
-
-    private suspend fun connectSocket() {
-        withContext(Dispatchers.IO) {
-            mSocket.connect()
-        }
-    }
-
-    private fun setupListeners() {
-        mSocket.on(Socket.EVENT_CONNECT) {
-            println("Connected to the server")
-        }.on("my response") { args ->
-            println("Received a response from the server: ${args[0]}")
-        }.on(Socket.EVENT_DISCONNECT) {
-            println("Disconnected from the server")
-        }
-    }
-
-    fun sendMessage(message: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            if (mSocket.connected()) {
-                mSocket.emit("send message", message)
-            }
-        }
-    }
-}
 
 class MainActivity : AppCompatActivity() {
     private lateinit var socketClient: SocketClient
@@ -80,6 +38,11 @@ class MainActivity : AppCompatActivity() {
             runOnUiThread{
                 connectInfo.text="send successfully"
             }
+        }
+        val startButton=findViewById<Button>(R.id.start_button)
+        startButton.setOnClickListener{
+            val intent= Intent(this, MessageActivity::class.java)
+            startActivity(intent)
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.example.socketdemo
 
+import android.provider.ContactsContract.CommonDataKinds.Nickname
+
 enum class TYPE {
     MSG_TEXT_SEND,
     MSG_TEXT_RECEIVE,
@@ -16,15 +18,40 @@ enum class TYPE {
     MSG_JOB_SEND,
     MSG_JOB_RECEIVE,
 }
-
-internal class Message {
-    var message: String? = null
-    var sender: User? = null
+class User{
+    constructor(sid:String, nickname: String){
+        this.sid=sid
+        this.nickname=nickname
+    }
+    var sid:String
+        set(id){
+            field=id
+        }
+        get()=field
+    var nickname:String
+        set(name){
+            field=name
+        }
+        get()=field
+}
+class Message {
+    var message: String
+        set(msg){
+            this.message=msg
+        }
+        get()=field
+    var sender: User
     var createdAt: Long = 0
-}
+        set(time){
+            field=time
+        }
+        get()=field
+    constructor(message: String, date:Long, user:User){
+        this.message=message
+        this.createdAt=date
+        this.sender=user
+    }
 
-internal class User {
-    var nickname: String? = null
-    var profileUrl: String? = null
-}
 
+
+}
