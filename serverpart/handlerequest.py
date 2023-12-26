@@ -24,12 +24,18 @@ class App:
         resp = None
         method = request_body["method"]
         args = request_body["args"]
+        nickname = str(args[0])
+        # print(f"nick name is{args}")
         if method == "login":
             # store into session
             request.session = Session(sid)
             response_from_db = request.session.store_session_info(args=args)
             response_data = json.dumps(
-                {"success": response_from_db[0], "error msg": response_from_db[1]}
+                {
+                    "success": response_from_db[0],
+                    "error msg": response_from_db[1],
+                    "nickname": nickname,
+                }
             )
             resp = Response(response_data, content_type="application/json", status=200)
             expires = datetime.datetime.now() + datetime.timedelta(days=365)

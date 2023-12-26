@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         startButton.setOnClickListener{
 
             val usernameInput=findViewById<EditText>(R.id.username_input)
-            val username=usernameInput.text
+            val username=usernameInput.text.toString()
             val jsonArr=JSONArray(arrayOf(username, LocalTime.now()))
             val jsonObject=JSONObject()
             jsonObject.put("method", "login")
@@ -94,6 +94,12 @@ class MainActivity : AppCompatActivity() {
                                     Profile.sid=sidCookie
                                 }
                             }
+                            val nickname=jsonObjectFromServer.getString("nickname").toString()
+                            Profile.nickname=nickname
+//                            runOnUiThread {
+//                                val failureText=findViewById<TextView>(R.id.failure_text)
+//                                failureText.text= nickname
+//                            }
                             val intent= Intent(this, MessageActivity::class.java)
                             startActivity(intent)
                         }

@@ -94,7 +94,7 @@ class MessageActivity:AppCompatActivity() {
 //            get the message
             val message=messageSent.text
             val date= System.currentTimeMillis()//use system function to get the current time
-            val name= "John"//use profile to get the nickname of the sender
+            val name= Profile.nickname//use profile to get the nickname of the sender
             val messagePackage = JSONObject()
             messagePackage.put("sid", Profile.sid)
             messagePackage.put("message", message)

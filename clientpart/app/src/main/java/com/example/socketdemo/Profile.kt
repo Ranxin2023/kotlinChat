@@ -16,4 +16,9 @@ class ProfilePreference (var context: Context? = null){
             this.prefs?.edit()?.putString("sid", value)?.apply()
         }
         get() = prefs?.getString("sid", "") ?: ""
+    var nickname:String
+        set(value) {
+            this.prefs?.edit()?.putString("nickname", value)?.apply()
+        }
+        get() = prefs?.getString("nickname", "") ?: ""
 }

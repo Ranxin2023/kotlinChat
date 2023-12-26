@@ -5,9 +5,15 @@ import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
 class Utils{
-    public fun formatDateTime(time: Long, timeZoneId: String): String {
+    fun formatTime(time: Long, timeZoneId: String): String {
         val date=Date(time)
-        val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val formatter = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+        formatter.timeZone = TimeZone.getTimeZone(timeZoneId)
+        return formatter.format(date)
+    }
+    fun formatDate(time: Long, timeZoneId: String): String {
+        val date=Date(time)
+        val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         formatter.timeZone = TimeZone.getTimeZone(timeZoneId)
         return formatter.format(date)
     }

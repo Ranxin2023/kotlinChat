@@ -18,6 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:text="@string/default_date"
+        android:textColor="#C0C0C0"
         />
     <ImageView
         android:id="@+id/receiver_profile"
@@ -57,13 +58,17 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_marginBottom="8dp"
+                android:maxWidth="260dp"
+                android:paddingLeft="12dp"
+                android:paddingTop="8dp"
+                android:paddingRight="12dp"
                 android:text="Message"
                 android:textColor="#000000"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/receiver_time"
+        android:id="@+id/time_stamp_receiver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="8:00"
