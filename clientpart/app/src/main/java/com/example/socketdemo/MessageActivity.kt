@@ -19,14 +19,14 @@ import java.net.URISyntaxException
 class MessageActivity:AppCompatActivity() {
     private lateinit var mMessageRecycler:RecyclerView
     private lateinit var mMessageAdapter:MessageListAdapter
-    private lateinit var serverHost:String
+//    private lateinit var serverHost:String
     private lateinit var mSocket: Socket
     private lateinit var messageList:ArrayList<Message>
     private lateinit var messageSent:EditText
     //    socket functions
     private fun initSocket(){
         try {
-            mSocket = IO.socket(this.serverHost)
+            mSocket = IO.socket(Profile.socketBaseUrl)
         } catch (e: URISyntaxException) {
             e.printStackTrace()
         }
@@ -59,6 +59,8 @@ class MessageActivity:AppCompatActivity() {
                 this.messageSent.text.clear()
             }
 
+        }.on("error sending"){
+
         }.on(Socket.EVENT_DISCONNECT) {
             println("Disconnected from the server")
         }
@@ -74,7 +76,7 @@ class MessageActivity:AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.message_activity)
-        this.serverHost = "http://192.168.108.1:5000"
+//        this.serverHost = "http://192.168.108.1:5000"
         this.initSocket()
         this.startSocket()
 
@@ -94,6 +96,7 @@ class MessageActivity:AppCompatActivity() {
             val date= System.currentTimeMillis()//use system function to get the current time
             val name= "John"//use profile to get the nickname of the sender
             val messagePackage = JSONObject()
+            messagePackage.put("sid", Profile.sid)
             messagePackage.put("message", message)
             messagePackage.put("date", date)
             messagePackage.put("nickname", name)

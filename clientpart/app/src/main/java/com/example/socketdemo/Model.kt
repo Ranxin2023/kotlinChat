@@ -37,7 +37,7 @@ class User{
 class Message {
     var message: String
         set(msg){
-            this.message=msg
+            field=msg
         }
         get()=field
     var sender: User
