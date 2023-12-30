@@ -2,19 +2,15 @@ package com.example.socketdemo
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class MessageListAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
+class PrivateRoomMessageListAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder> {
     companion object {
         private const val VIEW_TYPE_MESSAGE_SENT = 1
         private const val VIEW_TYPE_MESSAGE_RECEIVED = 2
     }
-    private val mContext:Context
+    private val mContext: Context
     private val mMessageList:ArrayList<Message>
 
     constructor(context: Context, messageList: ArrayList<Message>){
@@ -46,8 +42,8 @@ class MessageListAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view=when(viewType){
-            VIEW_TYPE_MESSAGE_RECEIVED->LayoutInflater.from(parent.context).inflate(R.layout.message_receiver_item, parent, false)
-            VIEW_TYPE_MESSAGE_SENT->LayoutInflater.from(parent.context).inflate(R.layout.message_sender_item, parent, false)
+            VIEW_TYPE_MESSAGE_RECEIVED-> LayoutInflater.from(parent.context).inflate(R.layout.message_receiver_item, parent, false)
+            VIEW_TYPE_MESSAGE_SENT-> LayoutInflater.from(parent.context).inflate(R.layout.message_sender_item, parent, false)
             else ->null
         }
         return when(viewType){
@@ -56,5 +52,4 @@ class MessageListAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder> {
             else -> throw IllegalArgumentException("Invalid view type")
         }
     }
-
 }

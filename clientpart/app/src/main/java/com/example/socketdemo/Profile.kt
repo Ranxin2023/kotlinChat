@@ -2,6 +2,7 @@ package com.example.socketdemo
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.socketdemo.SocketClient
 
 class ProfilePreference (var context: Context? = null){
     private val prefsFilename = "com.example.socketdemo.prefs"
@@ -21,4 +22,5 @@ class ProfilePreference (var context: Context? = null){
             this.prefs?.edit()?.putString("nickname", value)?.apply()
         }
         get() = prefs?.getString("nickname", "") ?: ""
+
 }

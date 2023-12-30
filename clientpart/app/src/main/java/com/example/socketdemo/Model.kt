@@ -41,6 +41,10 @@ class Message {
         }
         get()=field
     var sender: User
+        set(user){
+            field=user
+        }
+        get() = field
     var createdAt: Long = 0
         set(time){
             field=time
@@ -51,7 +55,4 @@ class Message {
         this.createdAt=date
         this.sender=user
     }
-
-
-
 }

@@ -30,6 +30,7 @@ class App:
             # store into session
             request.session = Session(sid)
             response_from_db = request.session.store_session_info(args=args)
+            # This should store all the session info into the profile of the client
             response_data = json.dumps(
                 {
                     "success": response_from_db[0],
@@ -38,6 +39,11 @@ class App:
                 }
             )
             resp = Response(response_data, content_type="application/json", status=200)
+        if method == "logout":
+            request.session = Session(sid)
+            request.session.sid = ""
+
+        if request.session:
             expires = datetime.datetime.now() + datetime.timedelta(days=365)
             resp.set_cookie("sid", request.session.sid, expires=expires)
         return resp

@@ -56,6 +56,9 @@ class SessionDatabase:
             self._conn.rollback()
             return False, str(e)
 
+    def logout_session_info(self, sid):
+        pass
+
     def find_session_status(self, sid):
         cmd = "SELECT status FROM {} WHERE sid = %s".format(self.table_name)
         try:
