@@ -49,8 +49,9 @@ class MessageActivity:AppCompatActivity() {
                 val message=jsonObjectFromServer.getString("message").toString()
                 val date=jsonObjectFromServer.getString("date").toLong()
                 val sid=jsonObjectFromServer.get("sid").toString()
+                val photoCode=jsonObjectFromServer.get("photo encode").toString()
                 val nickname=jsonObjectFromServer.getString("nickname").toString()
-                messageList.add(Message(message, date, User(sid, nickname)));
+                messageList.add(Message(message, date, User(sid, nickname, photoCode)));
                 mMessageAdapter.notifyDataSetChanged()
                 messageSent.text.clear()
             }
@@ -62,7 +63,7 @@ class MessageActivity:AppCompatActivity() {
         this.mMessageRecycler.layoutManager=LinearLayoutManager(this)
         this.mMessageRecycler.adapter=this.mMessageAdapter
         val sendButton=findViewById<Button>(R.id.send_button)
-        this.messageSent=findViewById<EditText>(R.id.text_message_sent)
+        this.messageSent=findViewById(R.id.text_message_sent)
         sendButton.setOnClickListener {
 //            get the send time
 //            get the sender name
@@ -75,7 +76,7 @@ class MessageActivity:AppCompatActivity() {
             messagePackage.put("message", message)
             messagePackage.put("date", date)
             messagePackage.put("nickname", name)
-
+            messagePackage.put("photo encode", Profile.photoId)
 //            append the json from server and store in message list
             this.sendMessage(messagePackage)
         }

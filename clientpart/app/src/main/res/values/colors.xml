@@ -4,6 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="time">#FFC0C0C0</color>
     <color name="green">#FF00CC00</color>
+    <color name="dark_green">#FF006600</color>
     <color name="exit">#FFCC5500</color>
     <color name="gray">#FF888888</color>
 </resources>

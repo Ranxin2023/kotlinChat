@@ -18,7 +18,7 @@ async def connect(sid, environ):
 @sio.on("send message")
 async def my_message(socket_id, data):
     sid = data["sid"]
-    print(f"message received with socketid:{sid}, data: {data}")
+    print(f"message received with socketid:{socket_id}, sid: {sid}")
     # get the sid from the database
     # ---session code start
     if sid is None:
@@ -33,7 +33,6 @@ async def my_message(socket_id, data):
     else:
         # ---session code end
         print("successfully handle the socket server")
-        # data["sid"] = sid
         await sio.emit("my response", data)
 
 

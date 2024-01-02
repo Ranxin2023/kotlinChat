@@ -25,6 +25,7 @@ class App:
         method = request_body["method"]
         args = request_body["args"]
         nickname = str(args[0])
+        photo_code = str(args[2])
         # print(f"nick name is{args}")
         if method == "login":
             # store into session
@@ -36,8 +37,10 @@ class App:
                     "success": response_from_db[0],
                     "error msg": response_from_db[1],
                     "nickname": nickname,
+                    "profile photo": photo_code,
                 }
             )
+            # print(len(request.session.sid))
             resp = Response(response_data, content_type="application/json", status=200)
         if method == "logout":
             request.session = Session(sid)

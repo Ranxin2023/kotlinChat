@@ -18,12 +18,4 @@ class Session:
         return self.db.store_session_info([self.sid] + args)
 
     def find_session(self):
-        success, status = self.db.find_session_status(self.sid)
-        if success:
-            # nickname = data[0]
-            # status = data[0]
-            if status == "login":
-                return True, None
-            else:
-                return False, "user is not online"
-        return False, status
+        return self.db.find_session_status(self.sid)

@@ -39,15 +39,16 @@ class SessionDatabase:
         sid = str(args[0])
         username = str(args[1])
         login_time = str(args[2])
+        photo_encode = str(args[3])
         cmd = "INSERT INTO  {} \
-            (sid, nickname, login_time, status) \
-                VALUES(%s, %s, %s, %s)".format(
+            (sid, nickname, login_time, status, profile_photo) \
+                VALUES(%s, %s, %s, %s, %s)".format(
             self.table_name
         )
         try:
             self._cursor.execute(
                 cmd,
-                (sid, username, login_time, "login"),
+                (sid, username, login_time, "login", photo_encode),
             )
             self._conn.commit()
             return True, None
@@ -60,13 +61,19 @@ class SessionDatabase:
         pass
 
     def find_session_status(self, sid):
-        cmd = "SELECT status FROM {} WHERE sid = %s".format(self.table_name)
+        cmd = "SELECT status, profile_photo FROM {} WHERE sid = %s".format(
+            self.table_name
+        )
         try:
             self._cursor.execute(cmd, (sid))
             output = self._cursor.fetchone()
             if not output:
                 return False, "User does not exist"
-            return True, output[0]
+            # print(output[0])
+            if output[0] == "login":
+                # print(output[0])
+                return True, output[1]
+            return False, "User does not online"
 
         except pymysql.Error as e:
             print("Error sending order to the database:", e)

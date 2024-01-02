@@ -1,5 +1,6 @@
 package com.example.socketdemo
 
+import android.graphics.Bitmap
 import android.provider.ContactsContract.CommonDataKinds.Nickname
 
 enum class TYPE {
@@ -19,13 +20,19 @@ enum class TYPE {
     MSG_JOB_RECEIVE,
 }
 class User{
-    constructor(sid:String, nickname: String){
+    constructor(sid:String, nickname: String, profilePhoto:String){
         this.sid=sid
         this.nickname=nickname
+        this.photoCode=profilePhoto
     }
     var sid:String
         set(id){
             field=id
+        }
+        get()=field
+    var photoCode:String
+        set(value) {
+            field=value
         }
         get()=field
     var nickname:String

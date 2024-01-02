@@ -36,7 +36,8 @@ class PrivateRoomActivity:AppCompatActivity() {
                 val date=jsonObjectFromServer.getString("date").toLong()
                 val sid=jsonObjectFromServer.get("sid").toString()
                 val nickname=jsonObjectFromServer.getString("nickname").toString()
-                messageList.add(Message(message, date, User(sid, nickname)));
+                val photoCode=jsonObjectFromServer.get("photo code").toString()
+                messageList.add(Message(message, date, User(sid, nickname, photoCode)));
                 mMessageAdapter.notifyDataSetChanged()
                 messageSent.text.clear()
             }
