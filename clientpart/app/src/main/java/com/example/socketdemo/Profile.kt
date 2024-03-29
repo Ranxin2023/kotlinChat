@@ -7,7 +7,7 @@ import com.example.socketdemo.SocketClient
 class ProfilePreference (var context: Context? = null){
     private val prefsFilename = "com.example.socketdemo.prefs"
     private var prefs: SharedPreferences? = null
-    val baseUrl="http://192.168.108.1:80"
+    val baseUrl="http://192.168.108.1:8080"
     val socketBaseUrl="http://192.168.108.1:5000"
     init {
         this.prefs = context?.getSharedPreferences(prefsFilename, Context.MODE_PRIVATE)

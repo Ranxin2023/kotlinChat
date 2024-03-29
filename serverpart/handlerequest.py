@@ -65,4 +65,4 @@ class App:
 if __name__ == "__main__":
     from werkzeug.serving import run_simple
 
-    run_simple("192.168.108.1", 80, App())
+    run_simple("192.168.108.1", 8080, App())

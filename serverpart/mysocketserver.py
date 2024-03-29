@@ -36,6 +36,11 @@ async def my_message(socket_id, data):
         await sio.emit("my response", data)
 
 
+@sio.on("enter room")
+async def chat_room(socket_id, data):
+    sid = data["sid"]
+
+
 @sio.event
 async def disconnect(sid):
     print("disconnected from server")
