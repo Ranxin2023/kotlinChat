@@ -16,6 +16,7 @@
         android:networkSecurityConfig="@xml/network_secure_config"
         tools:targetApi="31">
         <activity android:name=".MessageActivity"/>
+        <activity android:name=".ChatRoomActivity"/>
         <activity android:name=".PrivateRoomActivity"/>
         <activity
             android:name=".MainActivity"

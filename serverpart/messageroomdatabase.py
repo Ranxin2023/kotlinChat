@@ -15,10 +15,12 @@ class MessageRoomDatabase:
         self.use_ssl = False
         self.ssl = {}
 
-    def upload_message(self, sender: str, msg: str):
-        cmd = "INSERT INTO {} message, sender VALUES (%s, %s)".format(self.table_name)
+    def upload_message(self, sender_id: str, sender_name: str, msg: str):
+        cmd = "INSERT INTO {} message, sender VALUES (%s, %s, %s)".format(
+            self.table_name
+        )
         try:
-            self._cursor.execute(cmd, (sender, msg))
+            self._cursor.execute(cmd, (sender_id, sender_name, msg))
             self._conn.commit()
             return True, None
         except pymysql.Error as e:

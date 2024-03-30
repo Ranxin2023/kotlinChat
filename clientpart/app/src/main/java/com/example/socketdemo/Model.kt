@@ -63,3 +63,20 @@ class Message {
         this.sender=user
     }
 }
+
+class ChatRoom{
+    constructor(roomName:String, photoCode:String){
+        this.roomName=roomName
+        this.roomPhotoCode=photoCode
+    }
+    var roomName: String
+        set(name){
+            field=name
+        }
+        get() = field
+    var roomPhotoCode:String
+        set(value) {
+            field=value
+        }
+        get()=field
+}

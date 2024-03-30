@@ -123,7 +123,7 @@ class MainActivity : AppCompatActivity() {
 //                                val failureText=findViewById<TextView>(R.id.failure_text)
 //                                failureText.text= nickname
 //                            }
-                            val intent= Intent(this, MessageActivity::class.java)
+                            val intent= Intent(this, ChatRoomActivity::class.java)
                             startActivity(intent)
                         }
                         else{

@@ -9,4 +9,4 @@ class UserRoom:
         self.db = UserRoomDatabase(self.localhost, self.db_username, self.db_password)
 
     def enter_user(self, username: str):
-        pass
+        self.dp.enter_room(username=username)
