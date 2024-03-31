@@ -26,13 +26,7 @@ class MessageActivity:AppCompatActivity() {
     private lateinit var messageSent:EditText
     //    socket functions
 
-    private fun sendMessage(message: JSONObject) {
-        CoroutineScope(Dispatchers.IO).launch {
-            if (mSocket.getSocket().connected()) {
-                mSocket.getSocket().emit("send message", message)
-            }
-        }
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +56,29 @@ class MessageActivity:AppCompatActivity() {
         this.mMessageAdapter=MessageListAdapter(this, messageList)
         this.mMessageRecycler.layoutManager=LinearLayoutManager(this)
         this.mMessageRecycler.adapter=this.mMessageAdapter
+        this.sendMessage()
+        val exitButton=findViewById<Button>(R.id.exit_button)
+        exitButton.setOnClickListener{
+            this.mSocket.disconnectSocket()
+            val intent= Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+        val enterRoomButton=findViewById<Button>(R.id.enter_private_room_button)
+        enterRoomButton.setOnClickListener {
+            val intent=Intent(this, PrivateRoomActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun socketMessage(message: JSONObject) {
+        CoroutineScope(Dispatchers.IO).launch {
+            if (mSocket.getSocket().connected()) {
+                mSocket.getSocket().emit("send message", message)
+            }
+        }
+    }
+
+    private fun sendMessage(){
         val sendButton=findViewById<Button>(R.id.send_button)
         this.messageSent=findViewById(R.id.text_message_sent)
         sendButton.setOnClickListener {
@@ -78,18 +95,7 @@ class MessageActivity:AppCompatActivity() {
             messagePackage.put("nickname", name)
             messagePackage.put("photo encode", Profile.photoId)
 //            append the json from server and store in message list
-            this.sendMessage(messagePackage)
-        }
-        val exitButton=findViewById<Button>(R.id.exit_button)
-        exitButton.setOnClickListener{
-            this.mSocket.disconnectSocket()
-            val intent= Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-        val enterRoomButton=findViewById<Button>(R.id.enter_room_button)
-        enterRoomButton.setOnClickListener {
-            val intent=Intent(this, PrivateRoomActivity::class.java)
-            startActivity(intent)
+            this.socketMessage(messagePackage)
         }
     }
 }

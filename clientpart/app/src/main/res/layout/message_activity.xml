@@ -51,7 +51,7 @@
         android:backgroundTint="@color/exit"/>
 
     <Button
-        android:id="@+id/enter_room_button"
+        android:id="@+id/enter_private_room_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

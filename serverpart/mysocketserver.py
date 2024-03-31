@@ -36,6 +36,11 @@ async def my_message(socket_id, data):
         await sio.emit("my response", data)
 
 
+@sio.on("add friend")
+async def add_friend(socket_id, data):
+    friend_name = data["friend name"]
+
+
 @sio.on("enter room")
 async def chat_room(socket_id, data):
     sid = data["sid"]
