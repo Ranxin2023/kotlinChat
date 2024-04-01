@@ -27,6 +27,11 @@ class ProfilePreference (var context: Context? = null){
             this.prefs?.edit()?.putString("nickname", value)?.apply()
         }
         get() = prefs?.getString("nickname", "") ?: ""
+    var username:String
+        set(value) {
+            this.prefs?.edit()?.putString("username", value)?.apply()
+        }
+        get() = prefs?.getString("username", "") ?: ""
     var userid:String
         set(value) {
             this.prefs?.edit()?.putString("userid", value)?.apply()

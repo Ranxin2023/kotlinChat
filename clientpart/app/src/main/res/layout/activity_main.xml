@@ -27,17 +27,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:backgroundTint="@color/gray"/>
+
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="360dp"
         android:layout_marginEnd="10dp"
-        android:text="Username"
-        app:layout_constraintEnd_toStartOf="@+id/username_input"
+        android:text="@string/nick_name"
+        app:layout_constraintEnd_toStartOf="@+id/nickname_input"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/username_input"
+        android:id="@+id/nickname_input"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="350dp"
@@ -46,12 +48,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/start_button"
+        android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="450dp"
+        android:layout_marginTop="500dp"
         android:backgroundTint="@color/green"
-        android:text="Start Chat"
+        android:text="Login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -60,7 +62,7 @@
         android:id="@+id/upload_photo_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="550dp"
+        android:layout_marginTop="600dp"
         android:backgroundTint="@color/dark_green"
         android:text="Upload photo"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +73,7 @@
         android:id="@+id/failure_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/start_button"
+        app:layout_constraintBottom_toTopOf="@+id/login_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -84,5 +86,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <EditText
+        android:id="@+id/username_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="420dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Username"
+        app:layout_constraintBottom_toBottomOf="@+id/username_input"
+        app:layout_constraintEnd_toStartOf="@+id/username_input"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/username_input" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

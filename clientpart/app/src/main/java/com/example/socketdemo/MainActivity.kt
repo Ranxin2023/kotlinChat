@@ -75,12 +75,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun uploadUser(){
-        val startButton=findViewById<Button>(R.id.start_button)
+        val startButton=findViewById<Button>(R.id.login_button)
         startButton.setOnClickListener{
             val base64Image=this.imageViewToBase64(this.profilePhoto)
-            val usernameInput=findViewById<EditText>(R.id.username_input)
-            val username=usernameInput.text.toString()
-            val jsonArr=JSONArray(arrayOf(username, LocalTime.now(), base64Image))
+//            input the nickname
+            val nickNameInput=findViewById<EditText>(R.id.nickname_input)
+            val nickname=nickNameInput.text.toString()
+//            input the username
+            val userNameInput=findViewById<EditText>(R.id.username_input)
+            val username=userNameInput.text.toString()
+            val jsonArr=JSONArray(arrayOf(username, nickname, LocalTime.now(), base64Image))
             val jsonObject=JSONObject()
             jsonObject.put("method", "login")
             jsonObject.put("args", jsonArr)
@@ -115,8 +119,10 @@ class MainActivity : AppCompatActivity() {
 //                            runOnUiThread{
 //                                Toast.makeText(applicationContext, "length of profile.sid is${Profile.sid.length}", Toast.LENGTH_SHORT)
 //                            }
+                            val username=jsonObjectFromServer.getString("username").toString()
                             val nickname=jsonObjectFromServer.getString("nickname").toString()
                             val photoCode=jsonObjectFromServer.getString("profile photo").toString()
+                            Profile.username=username
                             Profile.nickname=nickname
                             Profile.photoId=photoCode
 //                            runOnUiThread {

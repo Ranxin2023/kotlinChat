@@ -25,7 +25,7 @@ class ChatRoomActivity:AppCompatActivity() {
         enterRoom()
     }
     private fun findRooms(){
-        
+
     }
     private fun sendUserInfo(){
 

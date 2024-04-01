@@ -14,3 +14,7 @@ class MessageRoom:
     def upload_message(self, msg: str, user: User):
         u_id = user.userid
         u_name = user.username
+        success, e_msg = self.db.upload_message(u_id, u_name, msg)
+        if not success:
+            return False, e_msg
+        return True, None
