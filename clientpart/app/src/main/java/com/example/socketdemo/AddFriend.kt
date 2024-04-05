@@ -16,14 +16,17 @@ class AddFriend:AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.invite_friends)
         this.mSocket= SocketClient()
+        this.addFriends()
     }
+
     private fun addFriends(){
+        this.mSocket.connectIfNeeded()
         val addFriendButton=findViewById<Button>(R.id.add_friends_button)
         val friendName=findViewById<EditText>(R.id.friend_list).text.toString()
 
         addFriendButton.setOnClickListener {
             val friendInfoPackage=JSONObject()
-            friendInfoPackage.put("adder", Profile.userid)
+            friendInfoPackage.put("username", Profile.username)
             friendInfoPackage.put("friend list", friendName)
             sendRoomInfo(friendInfoPackage)
         }

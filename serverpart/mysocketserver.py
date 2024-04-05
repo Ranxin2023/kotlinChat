@@ -4,6 +4,7 @@ import socketio
 from aiohttp import web
 
 from session import Session
+from users import User
 
 sio = socketio.AsyncServer(async_mode="aiohttp")
 app = web.Application()
@@ -39,6 +40,8 @@ async def my_message(socket_id, data):
 @sio.on("add friend")
 async def add_friend(socket_id, data):
     friend_name = data["friend name"]
+    user = User(data["username"])
+    user.add_freind(friend_name=friend_name)
 
 
 @sio.on("enter room")

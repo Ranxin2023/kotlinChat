@@ -20,16 +20,28 @@ class ChatRoomActivity:AppCompatActivity() {
         this.mChatRoomList= arrayListOf()
         this.mChatRoomAdapter= ChatRoomListAdapter(this, this.mChatRoomList)
         this.mSocket= SocketClient()
+        addFriends()
         findRooms()
         registerRoom()
-        enterRoom()
+//        enterRoom()
+    }
+
+    private fun addFriends(){
+        val addFriendButton=findViewById<Button>(R.id.add_friends_button)
+        addFriendButton.setOnClickListener {
+            val intent=Intent(this, AddFriend::class.java)
+            startActivity(intent)
+        }
     }
     private fun findRooms(){
+        this.mSocket.connectIfNeeded()
 
+        val userInfo=JSONObject()
+        userInfo.put("username", Profile.username)
+        userInfo.put("nickname", Profile.nickname)
+        this.mSocket.getSocket().emit("find rooms for users", userInfo)
     }
-    private fun sendUserInfo(){
 
-    }
     private fun registerRoom(){
         this.mSocket.connectIfNeeded()
         this.mSocket.getSocket().on("chat_room response"){

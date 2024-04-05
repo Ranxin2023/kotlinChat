@@ -4,6 +4,7 @@ import json
 from werkzeug.wrappers import Request, Response
 
 from session import Session
+from users import User
 
 
 class App:
@@ -29,6 +30,17 @@ class App:
         photo_code = str(args[3])
         # print(f"nick name is{args}")
         if method == "login":
+            # find user in users
+            user = User(username=username)
+            success, error_msg = user.find_user(username)
+            # print(f"error msg in find user {error_msg}")
+            if not success:
+                # error in storing user
+                return False, error_msg
+            elif error_msg != None:
+                # store user info
+                user.register_user(username, nickname, photo_code)
+
             # store into session
             request.session = Session(sid)
             response_from_db = request.session.store_session_info(args=args)
