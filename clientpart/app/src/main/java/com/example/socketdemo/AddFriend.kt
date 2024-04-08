@@ -1,5 +1,6 @@
 package com.example.socketdemo
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -17,17 +18,19 @@ class AddFriend:AppCompatActivity(){
         setContentView(R.layout.invite_friends)
         this.mSocket= SocketClient()
         this.addFriends()
+        this.exit()
     }
 
     private fun addFriends(){
         this.mSocket.connectIfNeeded()
         val addFriendButton=findViewById<Button>(R.id.add_friends_button)
-        val friendName=findViewById<EditText>(R.id.friend_list).text.toString()
 
         addFriendButton.setOnClickListener {
+            val friendNameEditText=findViewById<EditText>(R.id.friend_list)
+            val friendName=friendNameEditText.text.toString()
             val friendInfoPackage=JSONObject()
             friendInfoPackage.put("username", Profile.username)
-            friendInfoPackage.put("friend list", friendName)
+            friendInfoPackage.put("friend name", friendName)
             sendRoomInfo(friendInfoPackage)
         }
     }
@@ -36,6 +39,14 @@ class AddFriend:AppCompatActivity(){
             if (mSocket.getSocket().connected()) {
                 mSocket.getSocket().emit("add friend", friendInfo)
             }
+        }
+    }
+
+    private fun exit(){
+        val exitButton=findViewById<Button>(R.id.back_to_room_button)
+        exitButton.setOnClickListener {
+            val intent=Intent(this, ChatRoomActivity::class.java)
+            startActivity(intent)
         }
     }
 }

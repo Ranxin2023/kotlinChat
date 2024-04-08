@@ -41,12 +41,15 @@ async def my_message(socket_id, data):
 async def add_friend(socket_id, data):
     friend_name = data["friend name"]
     user = User(data["username"])
+    # print(f"friend is {friend_name}")
     user.add_freind(friend_name=friend_name)
+    user.create_room(friend_name=friend_name)
 
 
 @sio.on("enter room")
 async def chat_room(socket_id, data):
     sid = data["sid"]
+    print("enter room")
 
 
 @sio.event

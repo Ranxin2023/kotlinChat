@@ -1,4 +1,7 @@
+from chatroomdatabase import ChatRoomDatabase
 from userdatabase import UserDatabase
+from userfrienddatabase import UserFriendDatabase
+from userroomdatabase import UserRoomDatabase
 
 
 class User:
@@ -23,4 +26,15 @@ class User:
         # update database to make it offline
 
     def add_freind(self, friend_name: str):
-        pass
+        ufdb = UserFriendDatabase(self.localhost, self.db_username, self.db_password)
+        if ufdb.whether_friend(username=self.username, friend_name=friend_name):
+            return None
+        ufdb.add_friend(self.username, friend_name)
+
+    def create_room(self, friend_name: str):
+        crdb = ChatRoomDatabase(self.localhost, self.db_username, self.db_password)
+        chat_room_name = self.username + "&" + friend_name
+        crdb.register_two_people_room(roomname=chat_room_name, username=self.username)
+        urdb = UserRoomDatabase(self.localhost, self.db_username, self.db_password)
+        urdb.register_user_room(username=self.username, roomname=chat_room_name)
+        urdb.register_user_room(username=friend_name, roomname=chat_room_name)
