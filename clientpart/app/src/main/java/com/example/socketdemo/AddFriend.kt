@@ -34,6 +34,7 @@ class AddFriend:AppCompatActivity(){
             sendRoomInfo(friendInfoPackage)
         }
     }
+
     private fun sendRoomInfo(friendInfo: JSONObject) {
         CoroutineScope(Dispatchers.IO).launch {
             if (mSocket.getSocket().connected()) {
